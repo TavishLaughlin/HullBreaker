@@ -10,10 +10,10 @@ from input_handlers import EventHandler
 
 class Engine:
     def __init__(self, entities: Set[Entity], event_handler: EventHandler, player: Entity):
-        self.entities = event_handler
+        self.entities = entities
         self.event_handler = event_handler
         self.player = player
-    def handle_event(self, events: Iterable[Any]) -> None:
+    def handle_events(self, events: Iterable[Any]) -> None:
         for event in events:
             action = self.event_handler.dispatch(event)
 
@@ -24,7 +24,7 @@ class Engine:
 
             elif isinstance(action, EscapeAction):
                 raise SystemExit()
-    def render(selfself, console: Console, context: Context) -> None:
+    def render(self, console: Console, context: Context) -> None:
         for entity in self.entities:
             console.print(entity.x, entity.y, entity.char, fg = entity.color)
 
