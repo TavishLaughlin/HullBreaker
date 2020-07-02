@@ -13,7 +13,7 @@ graphic_dt = np.dtype(
 tile_dt = np.dtype(
     [
         ("walkable", np.bool),
-        ("transparent", np.bool)
+        ("transparent", np.bool),
         ("dark", graphic_dt),
     ]
 )
@@ -22,8 +22,9 @@ def new_tile(
         *,
         walkable: int,
         transparent: int,
-        dark: Tuple[omt, Tuple[int, int, int], Tuple[int, int, int]],
-) -> np.ndarray((walkable, transparent, dark), dtype = tile.dt)
+        dark: Tuple[int, Tuple[int, int, int], Tuple[int, int, int]],
+) -> np.ndarray:
+    return np.array((walkable, transparent, dark), dtype = tile_dt)
 
 floor = new_tile(
     walkable = True, transparent=True, dark=(ord(" "), (255, 255, 255), (50, 50, 150)),
